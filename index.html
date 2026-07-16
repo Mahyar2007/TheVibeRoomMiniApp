@@ -10,109 +10,243 @@
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
+
 margin:0;
 height:100vh;
-background:linear-gradient(135deg,#050505,#101b3d);
+
+background:
+radial-gradient(circle at top,#233b7a,transparent 40%),
+linear-gradient(135deg,#020202,#10162f);
+
 display:flex;
 justify-content:center;
 align-items:center;
-font-family:Arial;
+
+font-family:Arial,sans-serif;
+
 color:white;
+
+overflow:hidden;
+
 }
 
+
+/* نور پشت کارت */
+
+body:before{
+
+content:"";
+
+position:absolute;
+
+width:300px;
+height:300px;
+
+background:#4f8cff;
+
+filter:blur(120px);
+
+opacity:.35;
+
+}
+
+
+
+/* کارت شیشه ای */
+
 .box{
+
+position:relative;
 
 width:90%;
 max-width:420px;
 
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(20px);
+padding:35px 25px;
 
-border:1px solid rgba(255,255,255,.2);
+background:
+rgba(255,255,255,0.12);
 
-border-radius:30px;
+backdrop-filter:blur(25px);
 
-padding:30px;
+-webkit-backdrop-filter:blur(25px);
+
+border-radius:35px;
+
+border:1px solid rgba(255,255,255,.25);
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.5);
 
 text-align:center;
 
 }
 
 
+
+/* عکس */
+
 .avatar{
 
-width:90px;
-height:90px;
+width:100px;
+height:100px;
 
 border-radius:50%;
 
-border:3px solid #4f8cff;
-
 object-fit:cover;
 
+border:3px solid rgba(255,255,255,.7);
+
+box-shadow:
+0 0 30px #4f8cff;
+
 }
 
+
+
+/* برند */
 
 h1{
-margin:15px 0 5px;
+
+font-size:28px;
+
+margin:18px 0 8px;
+
+letter-spacing:1px;
+
 }
 
+
+
+/* خوش آمد */
 
 .username{
-opacity:.7;
-margin-bottom:20px;
+
+opacity:.8;
+
+margin-bottom:25px;
+
 }
 
+
+
+/* متن */
 
 textarea{
 
 width:100%;
+
 height:150px;
 
-border-radius:20px;
+resize:none;
 
-background:#080808;
+border-radius:25px;
 
-color:white;
-
-border:none;
-
-padding:15px;
+padding:18px;
 
 font-size:16px;
 
+color:white;
+
+background:
+
+rgba(0,0,0,.35);
+
+border:
+
+1px solid rgba(255,255,255,.2);
+
+outline:none;
+
+backdrop-filter:blur(10px);
+
 }
 
+
+textarea::placeholder{
+
+color:#aaa;
+
+}
+
+
+
+/* دکمه ها */
 
 button{
 
 width:100%;
 
-height:55px;
+height:58px;
 
-margin-top:15px;
+margin-top:18px;
 
-border:none;
+border-radius:25px;
 
-border-radius:20px;
+border:
 
-background:linear-gradient(90deg,#3a6eff,#00d4ff);
+1px solid rgba(255,255,255,.3);
+
+
+background:
+
+linear-gradient(
+135deg,
+rgba(79,140,255,.7),
+rgba(0,212,255,.5)
+);
+
 
 color:white;
 
 font-size:18px;
 
+font-weight:bold;
+
+cursor:pointer;
+
+backdrop-filter:blur(15px);
+
+transition:.3s;
+
 }
+
+
+
+button:hover{
+
+transform:scale(1.03);
+
+box-shadow:
+
+0 0 25px #00d4ff;
+
+}
+
 
 
 #admin{
 
 display:none;
 
-margin-top:15px;
+background:
 
-background:#222;
+rgba(255,255,255,.15);
+
+}
+
+
+.small{
+
+font-size:13px;
+
+opacity:.6;
+
+margin-top:15px;
 
 }
 
@@ -131,16 +265,20 @@ background:#222;
 <img id="avatar" class="avatar">
 
 
-<h1 id="name">
+<h1>
 TheVibeRoom
 </h1>
 
 
-<div id="username" class="username">
+<div id="name" class="username">
 </div>
 
 
-<textarea id="msg" placeholder="Write your secret..."></textarea>
+
+<textarea id="msg"
+placeholder="Write your secret...">
+</textarea>
+
 
 
 <button id="send">
@@ -148,9 +286,15 @@ TheVibeRoom
 </button>
 
 
+
 <button id="admin">
 ⚙️ Admin Panel
 </button>
+
+
+<div class="small">
+Every secret has a story...
+</div>
 
 
 </div>
@@ -163,7 +307,9 @@ TheVibeRoom
 const tg = Telegram.WebApp;
 
 tg.ready();
+
 tg.expand();
+
 
 
 const user = tg.initDataUnsafe.user;
@@ -174,11 +320,11 @@ if(user){
 
 
 document.getElementById("name").innerHTML =
-user.first_name || "User";
+"Welcome " + 
+(user.first_name || "User")
++
+" 👋";
 
-
-document.getElementById("username").innerHTML =
-"@" + (user.username || "");
 
 
 if(user.photo_url){
@@ -188,11 +334,10 @@ user.photo_url;
 
 }
 
+
 }
 
 
-
-// پنل فقط برای تو
 
 if(user && user.id == 8812851173){
 
@@ -205,7 +350,8 @@ document.getElementById("admin").style.display="block";
 document.getElementById("send").onclick=function(){
 
 
-let text=document.getElementById("msg").value;
+let text =
+document.getElementById("msg").value;
 
 
 if(!text){
@@ -221,6 +367,7 @@ alert("Message sent successfully");
 
 
 }
+
 
 
 
