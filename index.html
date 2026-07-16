@@ -15,11 +15,12 @@ box-sizing:border-box;
 }
 
 body{
+
 margin:0;
 height:100vh;
 
 background:
-radial-gradient(circle at top,#283b75,transparent 40%),
+radial-gradient(circle at top,#263b78,transparent 40%),
 linear-gradient(135deg,#020202,#101b3d);
 
 display:flex;
@@ -28,6 +29,7 @@ align-items:center;
 
 font-family:Arial;
 color:white;
+
 }
 
 
@@ -36,7 +38,7 @@ color:white;
 width:90%;
 max-width:420px;
 
-padding:30px;
+padding:35px 25px;
 
 background:rgba(255,255,255,.12);
 
@@ -64,9 +66,7 @@ object-fit:cover;
 
 border:3px solid #4f8cff;
 
-box-shadow:0 0 25px #4f8cff;
-
-background:#222;
+box-shadow:0 0 30px #4f8cff;
 
 }
 
@@ -75,6 +75,8 @@ background:#222;
 h1{
 
 margin:18px 0 5px;
+
+font-size:28px;
 
 }
 
@@ -120,7 +122,7 @@ button{
 
 width:100%;
 
-height:55px;
+height:58px;
 
 margin-top:15px;
 
@@ -160,7 +162,6 @@ opacity:.6;
 
 }
 
-
 </style>
 
 </head>
@@ -172,7 +173,11 @@ opacity:.6;
 <div class="box">
 
 
-<img id="avatar" class="avatar">
+<!-- عکس ثابت ربات -->
+<img 
+class="avatar"
+src="YOUR_LOGO_URL"
+>
 
 
 <h1>
@@ -180,11 +185,14 @@ TheVibeRoom
 </h1>
 
 
-<div id="userName" class="username">
+<div id="welcome" class="username">
 </div>
 
 
-<textarea id="msg" placeholder="Write your secret..."></textarea>
+<textarea 
+id="msg"
+placeholder="Write your secret..."
+></textarea>
 
 
 <button id="send">
@@ -221,32 +229,21 @@ const user = tg.initDataUnsafe.user;
 
 
 
+// فقط نمایش اسم کاربر
+
 if(user){
 
-
-document.getElementById("userName").innerHTML =
-"Welcome " + (user.first_name || "User") + " 👋";
-
-
-
-if(user.photo_url){
-
-document.getElementById("avatar").src =
-user.photo_url;
-
-}
-
-else{
-
-document.getElementById("avatar").src =
-"https://via.placeholder.com/100";
+document.getElementById("welcome").innerHTML =
+"Welcome " + 
+(user.first_name || "User")
++
+" 👋";
 
 }
 
 
-}
 
-
+// فقط برای خودت
 
 if(user && user.id == 8812851173){
 
@@ -257,7 +254,6 @@ document.getElementById("admin").style.display="block";
 
 
 document.getElementById("send").onclick=function(){
-
 
 let text =
 document.getElementById("msg").value;
@@ -272,8 +268,7 @@ return;
 }
 
 
-alert("Secret ready to send ✨");
-
+alert("Secret sent ✨");
 
 }
 
@@ -284,7 +279,6 @@ document.getElementById("admin").onclick=function(){
 alert("Admin Panel");
 
 }
-
 
 
 </script>
