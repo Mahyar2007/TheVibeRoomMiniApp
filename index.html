@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,9 +7,9 @@
 <title>TheVibeRoom</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -26,163 +26,66 @@ background:#050505;
 overflow:hidden;
 }
 
-body::before{
-content:'';
-position:absolute;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#3a6eff55,#00000000);
-animation:spin 12s linear infinite;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
 .card{
-
 width:92%;
 max-width:420px;
 padding:30px;
 border-radius:30px;
-
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(18px);
-
 border:1px solid rgba(255,255,255,.15);
-
 text-align:center;
 color:white;
-
-box-shadow:0 0 50px #2b6fff44;
-
-z-index:1;
-
-}
-
-.logo{
-
-width:120px;
-height:120px;
-
-border-radius:50%;
-
-border:3px solid #4f8cff;
-
-margin-bottom:20px;
-
-object-fit:cover;
-
 }
 
 h1{
-
 font-size:32px;
-margin-bottom:8px;
-
+margin-bottom:10px;
 }
 
 p{
-
 opacity:.8;
 margin-bottom:20px;
-
 }
 
 textarea{
-
 width:100%;
 height:170px;
-
 background:#101010;
-
 border:none;
-
 border-radius:18px;
-
 padding:15px;
-
 color:white;
-
-resize:none;
-
 font-size:16px;
-
-outline:none;
-
 }
 
 button{
-
 margin-top:20px;
-
 width:100%;
-
 height:55px;
-
 border:none;
-
 border-radius:16px;
-
-font-size:18px;
-
-cursor:pointer;
-
 background:linear-gradient(90deg,#3a6eff,#00d4ff);
-
 color:white;
-
-}
-
-.footer{
-
-margin-top:20px;
-
-font-size:13px;
-
-opacity:.5;
-
+font-size:18px;
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="card">
-
-
-<img class="logo" src="logo.jpg">
-
 
 <h1>𝑻𝒉𝒆𝑽𝒊𝒃𝒆𝑹𝒐𝒐𝒎</h1>
 
-
 <p>Every secret has a story...</p>
-
 
 <textarea id="message" placeholder="Write your message..."></textarea>
 
-
-<button id="send">
-✨ Send Secret
-</button>
-
-
-<div class="footer">
-
-Powered by Telegram Mini Apps
+<button id="send">✨ Send Secret</button>
 
 </div>
-
-
-</div>
-
 
 
 <script>
@@ -196,36 +99,50 @@ tg.expand();
 const user = tg.initDataUnsafe.user;
 
 
-document.getElementById("send").onclick = () => {
+// Supabase
+
+const SUPABASE_URL = "https://rjehesvliixzidgdsnrc.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_I60TXtFHu2MT-Fm8vul1Ig_5gL1WFLl";
+
+const db = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 
-const message = document.getElementById("message").value;
+
+document.getElementById("send").onclick = async ()=>{
+
+const text = document.getElementById("message").value;
 
 
-if(!message){
-
+if(!text){
 alert("Write something first");
-
 return;
-
 }
 
 
+await db
+.from("messages")
+.insert({
 
-console.log("USER:", user);
+telegram_id:user?.id,
+username:user?.username,
+first_name:user?.first_name,
+message:text
 
-console.log("MESSAGE:", message);
+});
 
 
 alert("Message sent successfully");
 
+document.getElementById("message").value="";
 
 };
 
 
 </script>
-
-
 
 </body>
 </html>
