@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -152,6 +153,7 @@ background:#222;
 }
 
 
+
 .footer{
 
 margin-top:15px;
@@ -173,26 +175,23 @@ opacity:.6;
 <div class="box">
 
 
-<!-- عکس ثابت ربات -->
-<img 
+<img
 class="avatar"
 src="IMG_20260716_024120_883.jpg"
 >
 
 
-<!-- اسم ثابت -->
 <h1>
 𝑻𝒉𝒆𝑽𝒊𝒃𝒆𝑹𝒐𝒐𝒎
 </h1>
 
 
-<!-- متن ثابت -->
-<div id="welcome" class="username">
+<div class="username">
 Send your secret message ✨
 </div>
 
 
-<textarea 
+<textarea
 id="msg"
 placeholder="Write your secret..."
 ></textarea>
@@ -219,7 +218,6 @@ Every secret has a story...
 
 <script>
 
-
 const tg = Telegram.WebApp;
 
 tg.ready();
@@ -228,22 +226,12 @@ tg.expand();
 
 
 
-const user = tg.initDataUnsafe.user;
+document.getElementById("send").onclick = async function(){
 
-
-// فقط برای خودت
-if(user && user.id == 8812851173){
-
-document.getElementById("admin").style.display="block";
-
-}
-
-
-
-document.getElementById("send").onclick=function(){
 
 let text =
 document.getElementById("msg").value;
+
 
 
 if(!text){
@@ -255,17 +243,78 @@ return;
 }
 
 
+
+let user = tg.initDataUnsafe.user;
+
+
+
+try{
+
+
+let response = await fetch("/api/send",{
+
+
+method:"POST",
+
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+message:text,
+
+user_id:user ? user.id : null
+
+})
+
+
+});
+
+
+
+let result = await response.json();
+
+
+
+if(result.success){
+
+
 alert("Secret sent ✨");
 
+
+document.getElementById("msg").value="";
+
+
+}else{
+
+
+alert("Error sending");
+
+
 }
 
 
 
-document.getElementById("admin").onclick=function(){
+}
 
-alert("Admin Panel");
+catch(error){
+
+
+alert("Connection error");
+
 
 }
+
+
+
+};
+
+
 
 
 </script>
