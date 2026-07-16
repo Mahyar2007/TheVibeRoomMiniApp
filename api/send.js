@@ -2,17 +2,17 @@ import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
 
-  if(req.method !== "POST"){
+  if (req.method !== "POST") {
     return res.status(405).json({
-      error:"Method not allowed"
+      error: "Method not allowed"
     });
   }
 
   const { message, user_id } = req.body;
 
-  if(!message){
+  if (!message) {
     return res.status(400).json({
-      error:"Message required"
+      error: "Message required"
     });
   }
 
@@ -21,22 +21,22 @@ export default async function handler(req, res) {
     process.env.SUPABASE_KEY
   );
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("messages")
     .insert([
       {
-        user_id: user_id,
+        telegram_id: user_id,
         message: message
       }
     ]);
 
-  if(error){
+  if (error) {
     return res.status(500).json({
-      error:error.message
+      error: error.message
     });
   }
 
-  res.status(200).json({
-    success:true
+  return res.status(200).json({
+    success: true
   });
 }
