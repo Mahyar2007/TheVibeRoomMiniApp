@@ -176,16 +176,19 @@ opacity:.6;
 <!-- عکس ثابت ربات -->
 <img 
 class="avatar"
-src="YOUR_LOGO_URL"
+src="IMG_20260716_024120_883.jpg"
 >
 
 
+<!-- اسم ثابت -->
 <h1>
-TheVibeRoom
+𝑻𝒉𝒆𝑽𝒊𝒃𝒆𝑹𝒐𝒐𝒎
 </h1>
 
 
+<!-- متن ثابت -->
 <div id="welcome" class="username">
+Send your secret message ✨
 </div>
 
 
@@ -228,23 +231,7 @@ tg.expand();
 const user = tg.initDataUnsafe.user;
 
 
-
-// فقط نمایش اسم کاربر
-
-if(user){
-
-document.getElementById("welcome").innerHTML =
-"Welcome " + 
-(user.first_name || "User")
-+
-" 👋";
-
-}
-
-
-
 // فقط برای خودت
-
 if(user && user.id == 8812851173){
 
 document.getElementById("admin").style.display="block";
