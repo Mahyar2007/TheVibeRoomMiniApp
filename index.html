@@ -497,7 +497,7 @@ document.getElementById("send").onclick = async ()=>{
 
         }else{
 
-            showToast("❌ خطا در ارسال پیام");
+            showToast(result.error || "❌ خطا");
 
         }
 
