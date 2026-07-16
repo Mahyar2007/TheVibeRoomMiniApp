@@ -6,15 +6,24 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
-
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({
+      success: false,
+      error: "Method not allowed"
+    });
   }
 
   try {
-
     const { message, user_id } = req.body;
 
+    if (!message || message.trim() === "") {
+      return res.status(400).json({
+        success: false,
+        error: "پیام خالی است"
+      });
+    }
+
+    // ذخیره در Supabase
     const { error } = await supabase
       .from("messages")
       .insert([
@@ -25,11 +34,16 @@ export default async function handler(req, res) {
       ]);
 
     if (error) {
-      return res.status(500).json({ error: error.message });
+      console.error(error);
+
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      });
     }
 
-    // ارسال به تلگرام خودت
-    await fetch(
+    // ارسال به تلگرام
+    const telegram = await fetch(
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
       {
         method: "POST",
@@ -41,23 +55,29 @@ export default async function handler(req, res) {
           text:
 `📩 Secret جدید
 
-👤 User ID: ${user_id}
+👤 User ID: ${user_id || "Unknown"}
 
 💬 ${message}`
         })
       }
     );
 
-    return res.json({
+    const telegramResult = await telegram.json();
+
+    console.log(telegramResult);
+
+    return res.status(200).json({
       success: true
     });
 
   } catch (e) {
 
+    console.error(e);
+
     return res.status(500).json({
+      success: false,
       error: e.message
     });
 
   }
-
 }
