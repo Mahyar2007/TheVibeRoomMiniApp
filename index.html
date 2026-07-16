@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TheVibeRoom</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -17,61 +18,42 @@ font-family:Arial,sans-serif;
 }
 
 body{
-
 height:100vh;
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
 background:#050505;
-
 overflow:hidden;
-
 }
 
 body::before{
-
 content:'';
-
 position:absolute;
-
 width:700px;
-
 height:700px;
-
 background:radial-gradient(circle,#3a6eff55,#00000000);
-
 animation:spin 12s linear infinite;
-
 }
 
 @keyframes spin{
-
-100%{transform:rotate(360deg);}
-
+100%{
+transform:rotate(360deg);
+}
 }
 
 .card{
 
 width:92%;
-
 max-width:420px;
-
 padding:30px;
-
 border-radius:30px;
 
 background:rgba(255,255,255,.08);
-
 backdrop-filter:blur(18px);
 
 border:1px solid rgba(255,255,255,.15);
 
 text-align:center;
-
 color:white;
 
 box-shadow:0 0 50px #2b6fff44;
@@ -83,7 +65,6 @@ z-index:1;
 .logo{
 
 width:120px;
-
 height:120px;
 
 border-radius:50%;
@@ -99,7 +80,6 @@ object-fit:cover;
 h1{
 
 font-size:32px;
-
 margin-bottom:8px;
 
 }
@@ -107,7 +87,6 @@ margin-bottom:8px;
 p{
 
 opacity:.8;
-
 margin-bottom:20px;
 
 }
@@ -115,7 +94,6 @@ margin-bottom:20px;
 textarea{
 
 width:100%;
-
 height:170px;
 
 background:#101010;
@@ -156,14 +134,6 @@ background:linear-gradient(90deg,#3a6eff,#00d4ff);
 
 color:white;
 
-transition:.3s;
-
-}
-
-button:hover{
-
-transform:scale(1.03);
-
 }
 
 .footer{
@@ -180,19 +150,29 @@ opacity:.5;
 
 </head>
 
+
 <body>
+
 
 <div class="card">
 
+
 <img class="logo" src="logo.jpg">
+
 
 <h1>𝑻𝒉𝒆𝑽𝒊𝒃𝒆𝑹𝒐𝒐𝒎</h1>
 
+
 <p>Every secret has a story...</p>
 
-<textarea placeholder="Write your message..."></textarea>
 
-<button>✨ Send Secret</button>
+<textarea id="message" placeholder="Write your message..."></textarea>
+
+
+<button id="send">
+✨ Send Secret
+</button>
+
 
 <div class="footer">
 
@@ -200,8 +180,52 @@ Powered by Telegram Mini Apps
 
 </div>
 
+
 </div>
 
-</body>
 
+
+<script>
+
+const tg = window.Telegram.WebApp;
+
+tg.ready();
+tg.expand();
+
+
+const user = tg.initDataUnsafe.user;
+
+
+document.getElementById("send").onclick = () => {
+
+
+const message = document.getElementById("message").value;
+
+
+if(!message){
+
+alert("Write something first");
+
+return;
+
+}
+
+
+
+console.log("USER:", user);
+
+console.log("MESSAGE:", message);
+
+
+alert("Message sent successfully");
+
+
+};
+
+
+</script>
+
+
+
+</body>
 </html>
