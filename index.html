@@ -16,7 +16,6 @@ box-sizing:border-box;
 }
 
 body{
-
 margin:0;
 height:100vh;
 
@@ -30,12 +29,9 @@ align-items:center;
 
 font-family:Arial;
 color:white;
-
 }
 
-
 .box{
-
 width:90%;
 max-width:420px;
 
@@ -52,12 +48,9 @@ border-radius:35px;
 text-align:center;
 
 box-shadow:0 20px 60px #000;
-
 }
 
-
 .avatar{
-
 width:100px;
 height:100px;
 
@@ -68,35 +61,20 @@ object-fit:cover;
 border:3px solid #4f8cff;
 
 box-shadow:0 0 30px #4f8cff;
-
 }
-
-
 
 h1{
-
 margin:18px 0 5px;
-
 font-size:28px;
-
 }
-
-
 
 .username{
-
 opacity:.8;
-
 margin-bottom:25px;
-
 }
 
-
-
 textarea{
-
 width:100%;
-
 height:150px;
 
 resize:none;
@@ -114,15 +92,10 @@ background:rgba(0,0,0,.35);
 border:1px solid rgba(255,255,255,.2);
 
 outline:none;
-
 }
 
-
-
 button{
-
 width:100%;
-
 height:58px;
 
 margin-top:15px;
@@ -139,185 +112,58 @@ color:white;
 font-size:18px;
 
 font-weight:bold;
-
 }
-
-
 
 #admin{
-
 display:none;
-
 background:#222;
-
 }
 
-
-
 .footer{
-
 margin-top:15px;
-
 font-size:13px;
-
 opacity:.6;
-
 }
 
 </style>
 
 </head>
 
-
 <body>
 
-
 <div class="box">
-
 
 <img
 class="avatar"
 src="IMG_20260716_024120_883.jpg"
 >
 
-
 <h1>
 𝑻𝒉𝒆𝑽𝒊𝒃𝒆𝑹𝒐𝒐𝒎
 </h1>
 
-
 <div class="username">
 Send your secret message ✨
 </div>
-
 
 <textarea
 id="msg"
 placeholder="Write your secret..."
 ></textarea>
 
-
 <button id="send">
 ✨ Send Secret
 </button>
-
 
 <button id="admin">
 ⚙️ Admin Panel
 </button>
 
-
 <div class="footer">
 Every secret has a story...
 </div>
 
-
 </div>
-
-
-
-<script>
-
-const tg = Telegram.WebApp;
-
-tg.ready();
-
-tg.expand();
-
-
-
-document.getElementById("send").onclick = async function(){
-
-
-let text =
-document.getElementById("msg").value;
-
-
-
-if(!text){
-
-alert("Write something");
-
-return;
-
-}
-
-
-
-let user = tg.initDataUnsafe.user;
-
-
-
-try{
-
-
-let response = await fetch("/api/send",{
-
-
-method:"POST",
-
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-
-body:JSON.stringify({
-
-message:text,
-
-user_id:user ? user.id : null
-
-})
-
-
-});
-
-
-
-let response = await fetch(
-"https://the-vibe-room-mini-app-4jol.vercel.app/api/send",
-  {
-
-
-
-if(result.success){
-
-
-alert("Secret sent ✨");
-
-
-document.getElementById("msg").value="";
-
-
-}else{
-
-
-alert("Error sending");
-
-
-}
-
-
-
-}
-
-catch(error){
-
-
-alert("Connection error");
-
-
-}
-
-
-
-};
-
-
-
 
 <script>
 
@@ -342,13 +188,13 @@ document.getElementById("send").onclick = async function(){
         const response = await fetch(
             "https://the-vibe-room-mini-app-4jol.vercel.app/api/send",
             {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
                 },
-                body: JSON.stringify({
-                    message: text,
-                    user_id: user ? user.id : null
+                body:JSON.stringify({
+                    message:text,
+                    user_id:user ? user.id : null
                 })
             }
         );
@@ -357,7 +203,7 @@ document.getElementById("send").onclick = async function(){
 
         if(result.success){
             alert("Secret sent ✨");
-            document.getElementById("msg").value = "";
+            document.getElementById("msg").value="";
         }else{
             alert(result.error || "Error sending");
         }
@@ -369,7 +215,6 @@ document.getElementById("send").onclick = async function(){
 };
 
 </script>
-
 
 </body>
 </html>
