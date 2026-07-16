@@ -15,80 +15,43 @@ box-sizing:border-box;
 }
 
 body{
-
 margin:0;
 height:100vh;
 
 background:
-radial-gradient(circle at top,#233b7a,transparent 40%),
-linear-gradient(135deg,#020202,#10162f);
+radial-gradient(circle at top,#283b75,transparent 40%),
+linear-gradient(135deg,#020202,#101b3d);
 
 display:flex;
 justify-content:center;
 align-items:center;
 
-font-family:Arial,sans-serif;
-
+font-family:Arial;
 color:white;
-
-overflow:hidden;
-
 }
 
-
-/* نور پشت کارت */
-
-body:before{
-
-content:"";
-
-position:absolute;
-
-width:300px;
-height:300px;
-
-background:#4f8cff;
-
-filter:blur(120px);
-
-opacity:.35;
-
-}
-
-
-
-/* کارت شیشه ای */
 
 .box{
-
-position:relative;
 
 width:90%;
 max-width:420px;
 
-padding:35px 25px;
+padding:30px;
 
-background:
-rgba(255,255,255,0.12);
+background:rgba(255,255,255,.12);
 
 backdrop-filter:blur(25px);
 
--webkit-backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.25);
 
 border-radius:35px;
 
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.5);
-
 text-align:center;
+
+box-shadow:0 20px 60px #000;
 
 }
 
-
-
-/* عکس */
 
 .avatar{
 
@@ -99,30 +62,23 @@ border-radius:50%;
 
 object-fit:cover;
 
-border:3px solid rgba(255,255,255,.7);
+border:3px solid #4f8cff;
 
-box-shadow:
-0 0 30px #4f8cff;
+box-shadow:0 0 25px #4f8cff;
+
+background:#222;
 
 }
 
 
-
-/* برند */
 
 h1{
 
-font-size:28px;
-
-margin:18px 0 8px;
-
-letter-spacing:1px;
+margin:18px 0 5px;
 
 }
 
 
-
-/* خوش آمد */
 
 .username{
 
@@ -133,8 +89,6 @@ margin-bottom:25px;
 }
 
 
-
-/* متن */
 
 textarea{
 
@@ -152,78 +106,36 @@ font-size:16px;
 
 color:white;
 
-background:
+background:rgba(0,0,0,.35);
 
-rgba(0,0,0,.35);
-
-border:
-
-1px solid rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.2);
 
 outline:none;
 
-backdrop-filter:blur(10px);
-
 }
 
 
-textarea::placeholder{
-
-color:#aaa;
-
-}
-
-
-
-/* دکمه ها */
 
 button{
 
 width:100%;
 
-height:58px;
+height:55px;
 
-margin-top:18px;
+margin-top:15px;
 
 border-radius:25px;
 
-border:
-
-1px solid rgba(255,255,255,.3);
-
+border:1px solid rgba(255,255,255,.3);
 
 background:
-
-linear-gradient(
-135deg,
-rgba(79,140,255,.7),
-rgba(0,212,255,.5)
-);
-
+linear-gradient(90deg,#3a6eff,#00d4ff);
 
 color:white;
 
 font-size:18px;
 
 font-weight:bold;
-
-cursor:pointer;
-
-backdrop-filter:blur(15px);
-
-transition:.3s;
-
-}
-
-
-
-button:hover{
-
-transform:scale(1.03);
-
-box-shadow:
-
-0 0 25px #00d4ff;
 
 }
 
@@ -233,20 +145,18 @@ box-shadow:
 
 display:none;
 
-background:
-
-rgba(255,255,255,.15);
+background:#222;
 
 }
 
 
-.small{
+.footer{
+
+margin-top:15px;
 
 font-size:13px;
 
 opacity:.6;
-
-margin-top:15px;
 
 }
 
@@ -270,15 +180,11 @@ TheVibeRoom
 </h1>
 
 
-<div id="name" class="username">
+<div id="userName" class="username">
 </div>
 
 
-
-<textarea id="msg"
-placeholder="Write your secret...">
-</textarea>
-
+<textarea id="msg" placeholder="Write your secret..."></textarea>
 
 
 <button id="send">
@@ -286,13 +192,12 @@ placeholder="Write your secret...">
 </button>
 
 
-
 <button id="admin">
 ⚙️ Admin Panel
 </button>
 
 
-<div class="small">
+<div class="footer">
 Every secret has a story...
 </div>
 
@@ -319,11 +224,8 @@ const user = tg.initDataUnsafe.user;
 if(user){
 
 
-document.getElementById("name").innerHTML =
-"Welcome " + 
-(user.first_name || "User")
-+
-" 👋";
+document.getElementById("userName").innerHTML =
+"Welcome " + (user.first_name || "User") + " 👋";
 
 
 
@@ -331,6 +233,13 @@ if(user.photo_url){
 
 document.getElementById("avatar").src =
 user.photo_url;
+
+}
+
+else{
+
+document.getElementById("avatar").src =
+"https://via.placeholder.com/100";
 
 }
 
@@ -363,17 +272,16 @@ return;
 }
 
 
-alert("Message sent successfully");
+alert("Secret ready to send ✨");
 
 
 }
 
 
 
-
 document.getElementById("admin").onclick=function(){
 
-alert("Admin panel coming...");
+alert("Admin Panel");
 
 }
 
