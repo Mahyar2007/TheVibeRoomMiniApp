@@ -70,7 +70,13 @@ export default async function handler(req, res) {
       success: true
     });
 
-  } catch (e) {
+  }catch(e){
+  console.error(e);
+  return res.status(500).json({
+    success: false,
+    error: e.message
+  });
+  }
 
     console.error(e);
 
