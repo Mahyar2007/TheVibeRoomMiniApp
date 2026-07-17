@@ -6,6 +6,7 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
+
   if (req.method !== "POST") {
     return res.status(405).json({
       success: false,
@@ -14,6 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
+
     const { message, user_id } = req.body;
 
     if (!message || message.trim() === "") {
@@ -34,15 +36,10 @@ export default async function handler(req, res) {
       ]);
 
     if (error) {
-      console.error(error);
-
-      return res.status(500).json({
-        success: false,
-        error: error.message
-      });
+      throw error;
     }
 
-    // ارسال به تلگرام
+    // ارسال پیام به تلگرام
     const telegram = await fetch(
       `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`,
       {
@@ -55,7 +52,7 @@ export default async function handler(req, res) {
           text:
 `📩 Secret جدید
 
-👤 User ID: ${user_id || "Unknown"}
+👤 User ID: ${user_id}
 
 💬 ${message}`
         })
@@ -64,19 +61,14 @@ export default async function handler(req, res) {
 
     const telegramResult = await telegram.json();
 
-    console.log(telegramResult);
+    console.log("Telegram:", telegramResult);
 
     return res.status(200).json({
-      success: true
+      success: true,
+      message: "پیام ارسال شد"
     });
 
-  }catch(e){
-  console.error(e);
-  return res.status(500).json({
-    success: false,
-    error: e.message
-  });
-  }
+  } catch (e) {
 
     console.error(e);
 
@@ -86,4 +78,5 @@ export default async function handler(req, res) {
     });
 
   }
+
 }
