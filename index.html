@@ -22,22 +22,32 @@ font-family:Vazirmatn,sans-serif;
 body{
 
 height:100vh;
-overflow:hidden;
 
 display:flex;
 align-items:center;
 justify-content:center;
 
+overflow:hidden;
+
 background:
-linear-gradient(135deg,#020617,#080014);
+
+radial-gradient(circle at 20% 20%,
+rgba(0,170,255,.35),
+transparent 35%),
+
+radial-gradient(circle at 80% 80%,
+rgba(170,0,255,.35),
+transparent 35%),
+
+linear-gradient(135deg,#020617,#090014);
+
 
 position:relative;
 
 }
 
 
-
-/* نورهای آرام */
+/* نورهای متحرک */
 
 body::before{
 
@@ -45,24 +55,26 @@ content:"";
 
 position:absolute;
 
-width:550px;
-height:550px;
-
+width:700px;
+height:700px;
 
 background:
+
 radial-gradient(
 circle,
-rgba(0,150,255,.35),
+rgba(0,200,255,.25),
 transparent 65%
 );
 
 
-top:-250px;
-left:-200px;
+top:-300px;
+left:-250px;
 
 
 animation:
-blueMove 18s infinite alternate ease-in-out;
+
+move1 15s infinite alternate ease-in-out;
+
 
 }
 
@@ -74,88 +86,90 @@ content:"";
 
 position:absolute;
 
-width:500px;
-height:500px;
+width:650px;
+height:650px;
 
 
 background:
+
 radial-gradient(
 circle,
-rgba(168,85,247,.30),
+rgba(168,85,247,.25),
 transparent 65%
 );
 
 
-bottom:-250px;
-right:-200px;
+bottom:-300px;
+right:-250px;
 
 
 animation:
-purpleMove 20s infinite alternate ease-in-out;
+
+move2 18s infinite alternate ease-in-out;
+
 
 }
 
 
 
-
-@keyframes blueMove{
+@keyframes move1{
 
 from{
 transform:translate(0,0);
 }
 
 to{
-transform:translate(120px,100px);
+transform:translate(150px,120px);
 }
 
 }
 
 
-
-@keyframes purpleMove{
+@keyframes move2{
 
 from{
 transform:translate(0,0);
 }
 
 to{
-transform:translate(-120px,-80px);
+transform:translate(-150px,-100px);
 }
 
 }
 
 
 
-/* ستاره ها */
 
-.particle{
+
+/* ذرات */
+
+.star{
 
 position:absolute;
 
-width:2px;
-height:2px;
+width:3px;
+height:3px;
 
 background:white;
 
 border-radius:50%;
 
-opacity:.45;
+opacity:.5;
 
 animation:
-stars 12s infinite linear;
+
+starMove 12s infinite linear;
 
 }
 
 
-
-@keyframes stars{
+@keyframes starMove{
 
 from{
 
 transform:translateY(100vh);
 
 }
-
 
 to{
 
@@ -169,7 +183,7 @@ transform:translateY(-20vh);
 
 
 
-/* کارت */
+/* کارت شیشه ای */
 
 .card{
 
@@ -186,33 +200,53 @@ max-width:420px;
 padding:40px 25px;
 
 
-border-radius:30px;
+border-radius:35px;
 
 
 background:
-rgba(255,255,255,.07);
+
+rgba(255,255,255,.10);
 
 
-backdrop-filter:blur(20px);
+
+backdrop-filter:
+
+blur(35px);
+
+
+
+-webkit-backdrop-filter:
+
+blur(35px);
+
 
 
 border:
-1px solid rgba(255,255,255,.18);
+
+1px solid rgba(255,255,255,.25);
+
 
 
 box-shadow:
 
-0 0 60px rgba(0,140,255,.20);
+
+0 30px 80px rgba(0,0,0,.45),
+
+inset 0 0 40px rgba(255,255,255,.08);
+
 
 
 text-align:center;
 
 
+
 animation:
+
 show 1s ease;
 
 
 }
+
 
 
 
@@ -224,8 +258,10 @@ from{
 opacity:0;
 
 transform:
-translateY(30px)
-scale(.95);
+
+translateY(40px)
+
+scale(.9);
 
 }
 
@@ -238,33 +274,37 @@ transform:none;
 
 }
 
+
 }
 
 
 
 
-/* موشک */
+/* راکت */
 
 .rocket{
 
-font-size:70px;
+font-size:75px;
+
 
 display:inline-block;
 
 
+filter:
+
+drop-shadow(0 0 25px #38bdf8);
+
+
 animation:
 
-rocketFloat 3s infinite ease-in-out;
+float 3s infinite ease-in-out;
 
-
-filter:
-drop-shadow(0 0 20px #38bdf8);
 
 }
 
 
 
-@keyframes rocketFloat{
+@keyframes float{
 
 50%{
 
@@ -277,15 +317,16 @@ transform:translateY(-15px);
 
 
 
+
 h1{
 
 margin-top:20px;
 
 font-size:25px;
 
-color:white;
-
 font-weight:800;
+
+color:white;
 
 }
 
@@ -305,15 +346,17 @@ font-size:15px;
 
 
 
-/* لودر */
+
+/* لودر شیشه ای */
 
 .loader{
 
-width:55px;
+width:60px;
 
-height:55px;
+height:60px;
 
 margin:30px auto;
+
 
 
 border-radius:50%;
@@ -324,12 +367,21 @@ border:
 5px solid rgba(255,255,255,.15);
 
 
+
 border-top-color:#6ddcff;
+
+
+
+box-shadow:
+
+0 0 35px #38bdf8;
+
 
 
 animation:
 
 spin 1s linear infinite;
+
 
 }
 
@@ -353,9 +405,10 @@ transform:rotate(360deg);
 
 .brand{
 
-font-size:22px;
+font-size:23px;
 
 font-weight:800;
+
 
 
 background:
@@ -363,20 +416,24 @@ background:
 linear-gradient(
 90deg,
 #00d9ff,
-#a855f7
+#c084fc
 );
+
 
 
 -webkit-background-clip:text;
 
+
 color:transparent;
+
 
 }
 
 
 
 
-/* دکمه */
+
+/* دکمه شیشه ای */
 
 .btn{
 
@@ -385,16 +442,26 @@ margin-top:30px;
 padding:15px;
 
 
-border-radius:20px;
+border-radius:22px;
+
 
 
 background:
-rgba(255,255,255,.1);
+
+rgba(255,255,255,.12);
+
+
+
+backdrop-filter:
+
+blur(20px);
+
 
 
 border:
 
-1px solid rgba(255,255,255,.2);
+1px solid rgba(255,255,255,.3);
+
 
 
 color:white;
@@ -412,11 +479,14 @@ transform:translateY(20px);
 transition:.8s;
 
 
+
 box-shadow:
 
-0 0 25px rgba(168,85,247,.3);
+0 0 30px rgba(168,85,247,.35);
+
 
 }
+
 
 
 
@@ -426,6 +496,7 @@ opacity:1;
 
 transform:none;
 
+
 }
 
 
@@ -434,26 +505,30 @@ transform:none;
 </head>
 
 
-<body>
 
+<body>
 
 
 <script>
 
-for(let i=0;i<15;i++){
+for(let i=0;i<18;i++){
 
-let p=document.createElement("div");
+let s=document.createElement("div");
 
-p.className="particle";
-
-
-p.style.left=Math.random()*100+"%";
+s.className="star";
 
 
-p.style.animationDelay=Math.random()*12+"s";
+s.style.left=Math.random()*100+"%";
 
 
-document.body.appendChild(p);
+s.style.animationDelay=Math.random()*12+"s";
+
+
+s.style.animationDuration=
+(8+Math.random()*8)+"s";
+
+
+document.body.appendChild(s);
 
 }
 
@@ -461,13 +536,12 @@ document.body.appendChild(p);
 
 
 
+
 <div class="card">
 
 
 <div class="rocket">
-
 🚀
-
 </div>
 
 
@@ -490,23 +564,18 @@ document.body.appendChild(p);
 
 
 <div class="brand">
-
 ✨ TheVibeRoom
-
 </div>
 
 
 
 <div class="btn" id="btn">
-
 به‌زودی برمی‌گردیم 🖤
-
 </div>
 
 
 
 </div>
-
 
 
 
@@ -517,6 +586,7 @@ setTimeout(()=>{
 document
 .getElementById("btn")
 .classList.add("show");
+
 
 },3000);
 
