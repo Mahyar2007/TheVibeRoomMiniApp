@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,169 +18,51 @@ box-sizing:border-box;
 font-family:Vazirmatn,sans-serif;
 }
 
-
 body{
-
 height:100vh;
-
+overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
 
-overflow:hidden;
-
 background:
-
-radial-gradient(circle at 20% 20%,
-rgba(0,170,255,.35),
-transparent 35%),
-
-radial-gradient(circle at 80% 80%,
-rgba(170,0,255,.35),
-transparent 35%),
-
-linear-gradient(135deg,#020617,#090014);
-
-
-position:relative;
+radial-gradient(circle at 20% 20%,#0066ff55,transparent 35%),
+radial-gradient(circle at 80% 80%,#9d00ff55,transparent 35%),
+linear-gradient(135deg,#020617,#09001a);
 
 }
 
 
-/* نورهای متحرک */
+/* ذرات نور */
 
-body::before{
-
-content:"";
-
+.particle{
 position:absolute;
-
-width:700px;
-height:700px;
-
-background:
-
-radial-gradient(
-circle,
-rgba(0,200,255,.25),
-transparent 65%
-);
-
-
-top:-300px;
-left:-250px;
-
-
-animation:
-
-move1 15s infinite alternate ease-in-out;
-
-
-}
-
-
-
-body::after{
-
-content:"";
-
-position:absolute;
-
-width:650px;
-height:650px;
-
-
-background:
-
-radial-gradient(
-circle,
-rgba(168,85,247,.25),
-transparent 65%
-);
-
-
-bottom:-300px;
-right:-250px;
-
-
-animation:
-
-move2 18s infinite alternate ease-in-out;
-
-
-}
-
-
-
-@keyframes move1{
-
-from{
-transform:translate(0,0);
-}
-
-to{
-transform:translate(150px,120px);
-}
-
-}
-
-
-@keyframes move2{
-
-from{
-transform:translate(0,0);
-}
-
-to{
-transform:translate(-150px,-100px);
-}
-
-}
-
-
-
-
-
-/* ذرات */
-
-.star{
-
-position:absolute;
-
-width:3px;
-height:3px;
-
-background:white;
-
+width:5px;
+height:5px;
+background:#fff;
 border-radius:50%;
-
-opacity:.5;
-
-animation:
-
-starMove 12s infinite linear;
-
+opacity:.7;
+animation:move 8s infinite;
 }
 
 
-@keyframes starMove{
+@keyframes move{
 
-from{
-
+0%{
 transform:translateY(100vh);
-
+opacity:0;
 }
 
-to{
+50%{
+opacity:1;
+}
 
+100%{
 transform:translateY(-20vh);
-
+opacity:0;
 }
 
 }
-
-
-
 
 
 /* کارت شیشه ای */
@@ -189,134 +71,71 @@ transform:translateY(-20vh);
 
 position:relative;
 
-z-index:5;
-
-
 width:90%;
-
 max-width:420px;
-
 
 padding:40px 25px;
 
-
-border-radius:35px;
-
+border-radius:30px;
 
 background:
+rgba(255,255,255,.08);
 
-rgba(255,255,255,.10);
+backdrop-filter:blur(25px);
 
-
-
-backdrop-filter:
-
-blur(35px);
-
-
-
--webkit-backdrop-filter:
-
-blur(35px);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.25);
-
-
+border:1px solid rgba(255,255,255,.18);
 
 box-shadow:
-
-
-0 30px 80px rgba(0,0,0,.45),
-
-inset 0 0 40px rgba(255,255,255,.08);
-
-
+0 0 60px #0066ff55,
+0 0 80px #a000ff33;
 
 text-align:center;
 
-
-
-animation:
-
-show 1s ease;
-
+animation:show 1s ease;
 
 }
-
-
 
 
 
 @keyframes show{
 
 from{
-
 opacity:0;
-
-transform:
-
-translateY(40px)
-
-scale(.9);
-
+transform:translateY(40px) scale(.9);
 }
-
 
 to{
-
 opacity:1;
-
 transform:none;
-
 }
 
-
 }
-
-
 
 
 /* راکت */
 
 .rocket{
 
-font-size:75px;
-
+font-size:70px;
 
 display:inline-block;
 
-
-filter:
-
-drop-shadow(0 0 25px #38bdf8);
-
-
-animation:
-
-float 3s infinite ease-in-out;
-
+animation:float 3s infinite ease-in-out;
 
 }
-
 
 
 @keyframes float{
 
 50%{
-
 transform:translateY(-15px);
-
 }
 
 }
 
 
 
-
+/* متن */
 
 h1{
 
@@ -324,12 +143,11 @@ margin-top:20px;
 
 font-size:25px;
 
-font-weight:800;
-
 color:white;
 
-}
+font-weight:800;
 
+}
 
 
 p{
@@ -346,94 +164,54 @@ font-size:15px;
 
 
 
-
-/* لودر شیشه ای */
+/* لودر */
 
 .loader{
 
-width:60px;
-
-height:60px;
+width:55px;
+height:55px;
 
 margin:30px auto;
 
-
-
 border-radius:50%;
 
-
-border:
-
-5px solid rgba(255,255,255,.15);
-
-
+border:5px solid rgba(255,255,255,.15);
 
 border-top-color:#6ddcff;
 
-
-
-box-shadow:
-
-0 0 35px #38bdf8;
-
-
-
-animation:
-
-spin 1s linear infinite;
-
+animation:spin 1s linear infinite;
 
 }
-
 
 
 @keyframes spin{
 
 to{
-
 transform:rotate(360deg);
-
 }
 
 }
-
-
-
 
 
 /* برند */
 
 .brand{
 
-font-size:23px;
+font-size:22px;
 
-font-weight:800;
+font-weight:bold;
 
-
-
-background:
-
-linear-gradient(
-90deg,
-#00d9ff,
-#c084fc
-);
-
-
+background:linear-gradient(90deg,#00d9ff,#a855f7);
 
 -webkit-background-clip:text;
 
-
 color:transparent;
-
 
 }
 
 
 
-
-
-/* دکمه شیشه ای */
+/* دکمه */
 
 .btn{
 
@@ -441,53 +219,25 @@ margin-top:30px;
 
 padding:15px;
 
+border-radius:20px;
 
-border-radius:22px;
+background:rgba(255,255,255,.1);
 
-
-
-background:
-
-rgba(255,255,255,.12);
-
-
-
-backdrop-filter:
-
-blur(20px);
-
-
-
-border:
-
-1px solid rgba(255,255,255,.3);
-
-
+border:1px solid rgba(255,255,255,.2);
 
 color:white;
 
-
 font-size:17px;
-
 
 opacity:0;
 
-
 transform:translateY(20px);
-
 
 transition:.8s;
 
-
-
-box-shadow:
-
-0 0 30px rgba(168,85,247,.35);
-
+box-shadow:0 0 30px #8b5cf655;
 
 }
-
-
 
 
 .btn.show{
@@ -495,7 +245,6 @@ box-shadow:
 opacity:1;
 
 transform:none;
-
 
 }
 
@@ -505,35 +254,28 @@ transform:none;
 </head>
 
 
-
 <body>
 
 
 <script>
 
-for(let i=0;i<18;i++){
+for(let i=0;i<35;i++){
 
-let s=document.createElement("div");
+let p=document.createElement("div");
 
-s.className="star";
+p.className="particle";
 
+p.style.left=Math.random()*100+"%";
 
-s.style.left=Math.random()*100+"%";
+p.style.animationDelay=Math.random()*8+"s";
 
+p.style.animationDuration=(5+Math.random()*8)+"s";
 
-s.style.animationDelay=Math.random()*12+"s";
-
-
-s.style.animationDuration=
-(8+Math.random()*8)+"s";
-
-
-document.body.appendChild(s);
+document.body.appendChild(p);
 
 }
 
 </script>
-
 
 
 
@@ -543,7 +285,6 @@ document.body.appendChild(s);
 <div class="rocket">
 🚀
 </div>
-
 
 
 <h1>
@@ -562,17 +303,19 @@ document.body.appendChild(s);
 <div class="loader"></div>
 
 
-
 <div class="brand">
+
 ✨ TheVibeRoom
+
 </div>
 
 
 
 <div class="btn" id="btn">
-به‌زودی برمی‌گردیم 🖤
-</div>
 
+به‌زودی برمی‌گردیم 🖤
+
+</div>
 
 
 </div>
@@ -583,10 +326,8 @@ document.body.appendChild(s);
 
 setTimeout(()=>{
 
-document
-.getElementById("btn")
+document.getElementById("btn")
 .classList.add("show");
-
 
 },3000);
 
