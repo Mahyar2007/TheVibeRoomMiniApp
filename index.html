@@ -29,16 +29,15 @@ align-items:center;
 justify-content:center;
 
 background:
-radial-gradient(circle at 20% 20%,#0066ff55,transparent 30%),
-radial-gradient(circle at 80% 80%,#a855f755,transparent 35%),
-linear-gradient(135deg,#020617,#070014);
+linear-gradient(135deg,#020617,#080014);
 
 position:relative;
 
 }
 
 
-/* نورهای شناور */
+
+/* نورهای آرام */
 
 body::before{
 
@@ -49,18 +48,21 @@ position:absolute;
 width:550px;
 height:550px;
 
-background:#2563eb;
 
-filter:blur(170px);
+background:
+radial-gradient(
+circle,
+rgba(0,150,255,.35),
+transparent 65%
+);
 
-opacity:.35;
 
-border-radius:50%;
+top:-250px;
+left:-200px;
 
-top:-200px;
-left:-150px;
 
-animation:orb1 12s infinite ease-in-out;
+animation:
+blueMove 18s infinite alternate ease-in-out;
 
 }
 
@@ -75,100 +77,95 @@ position:absolute;
 width:500px;
 height:500px;
 
-background:#9333ea;
 
-filter:blur(170px);
-
-opacity:.3;
-
-border-radius:50%;
-
-bottom:-200px;
-right:-150px;
-
-animation:orb2 14s infinite ease-in-out;
-
-}
+background:
+radial-gradient(
+circle,
+rgba(168,85,247,.30),
+transparent 65%
+);
 
 
+bottom:-250px;
+right:-200px;
 
-@keyframes orb1{
 
-50%{
-
-transform:translate(150px,100px);
-
-}
+animation:
+purpleMove 20s infinite alternate ease-in-out;
 
 }
 
 
 
-@keyframes orb2{
 
-50%{
+@keyframes blueMove{
 
-transform:translate(-120px,-120px);
+from{
+transform:translate(0,0);
+}
 
+to{
+transform:translate(120px,100px);
 }
 
 }
 
 
 
-/* ذرات */
+@keyframes purpleMove{
+
+from{
+transform:translate(0,0);
+}
+
+to{
+transform:translate(-120px,-80px);
+}
+
+}
+
+
+
+/* ستاره ها */
 
 .particle{
 
 position:absolute;
 
-width:4px;
-
-height:4px;
+width:2px;
+height:2px;
 
 background:white;
 
 border-radius:50%;
 
-opacity:.6;
+opacity:.45;
 
-box-shadow:0 0 15px white;
-
-animation:move 10s infinite linear;
-
-}
-
-
-
-@keyframes move{
-
-
-0%{
-
-transform:translateY(100vh) scale(.5);
-
-opacity:0;
+animation:
+stars 12s infinite linear;
 
 }
 
 
-40%{
 
-opacity:1;
+@keyframes stars{
 
-}
+from{
 
-
-100%{
-
-transform:translateY(-20vh) scale(1.5);
-
-opacity:0;
+transform:translateY(100vh);
 
 }
 
 
+to{
+
+transform:translateY(-20vh);
+
 }
+
+}
+
+
 
 
 
@@ -179,6 +176,7 @@ opacity:0;
 position:relative;
 
 z-index:5;
+
 
 width:90%;
 
@@ -192,57 +190,30 @@ border-radius:30px;
 
 
 background:
+rgba(255,255,255,.07);
 
-rgba(255,255,255,.08);
 
-
-backdrop-filter:blur(30px);
+backdrop-filter:blur(20px);
 
 
 border:
-
 1px solid rgba(255,255,255,.18);
 
 
 box-shadow:
 
-0 0 70px rgba(0,102,255,.25),
-0 0 100px rgba(168,85,247,.2);
+0 0 60px rgba(0,140,255,.20);
 
 
 text-align:center;
 
 
 animation:
-
-show 1s ease,
-glow 5s infinite alternate;
+show 1s ease;
 
 
 }
 
-
-
-@keyframes glow{
-
-from{
-
-box-shadow:
-
-0 0 50px rgba(0,102,255,.25);
-
-}
-
-
-to{
-
-box-shadow:
-
-0 0 100px rgba(168,85,247,.35);
-
-}
-
-}
 
 
 
@@ -252,7 +223,9 @@ from{
 
 opacity:0;
 
-transform:translateY(40px) scale(.9);
+transform:
+translateY(30px)
+scale(.95);
 
 }
 
@@ -269,7 +242,8 @@ transform:none;
 
 
 
-/* راکت */
+
+/* موشک */
 
 .rocket{
 
@@ -277,15 +251,20 @@ font-size:70px;
 
 display:inline-block;
 
-animation:float 3s infinite ease-in-out;
 
-filter:drop-shadow(0 0 25px #38bdf8);
+animation:
+
+rocketFloat 3s infinite ease-in-out;
+
+
+filter:
+drop-shadow(0 0 20px #38bdf8);
 
 }
 
 
 
-@keyframes float{
+@keyframes rocketFloat{
 
 50%{
 
@@ -297,7 +276,6 @@ transform:translateY(-15px);
 
 
 
-/* متن */
 
 h1{
 
@@ -349,8 +327,9 @@ border:
 border-top-color:#6ddcff;
 
 
-animation:spin 1s linear infinite;
+animation:
 
+spin 1s linear infinite;
 
 }
 
@@ -368,26 +347,32 @@ transform:rotate(360deg);
 
 
 
+
+
 /* برند */
 
 .brand{
 
 font-size:22px;
 
-font-weight:bold;
+font-weight:800;
 
 
 background:
 
-linear-gradient(90deg,#00d9ff,#a855f7);
+linear-gradient(
+90deg,
+#00d9ff,
+#a855f7
+);
 
 
 -webkit-background-clip:text;
 
-
 color:transparent;
 
 }
+
 
 
 
@@ -399,11 +384,11 @@ margin-top:30px;
 
 padding:15px;
 
+
 border-radius:20px;
 
 
 background:
-
 rgba(255,255,255,.1);
 
 
@@ -429,7 +414,7 @@ transition:.8s;
 
 box-shadow:
 
-0 0 30px #8b5cf655;
+0 0 25px rgba(168,85,247,.3);
 
 }
 
@@ -444,7 +429,6 @@ transform:none;
 }
 
 
-
 </style>
 
 </head>
@@ -456,7 +440,7 @@ transform:none;
 
 <script>
 
-for(let i=0;i<35;i++){
+for(let i=0;i<15;i++){
 
 let p=document.createElement("div");
 
@@ -466,10 +450,7 @@ p.className="particle";
 p.style.left=Math.random()*100+"%";
 
 
-p.style.animationDelay=Math.random()*10+"s";
-
-
-p.style.animationDuration=(6+Math.random()*10)+"s";
+p.style.animationDelay=Math.random()*12+"s";
 
 
 document.body.appendChild(p);
@@ -480,12 +461,13 @@ document.body.appendChild(p);
 
 
 
-
 <div class="card">
 
 
 <div class="rocket">
+
 🚀
+
 </div>
 
 
@@ -522,6 +504,7 @@ document.body.appendChild(p);
 </div>
 
 
+
 </div>
 
 
@@ -531,9 +514,9 @@ document.body.appendChild(p);
 
 setTimeout(()=>{
 
-document.getElementById("btn")
+document
+.getElementById("btn")
 .classList.add("show");
-
 
 },3000);
 
